@@ -1,0 +1,12 @@
+services:
+    app:
+        build: .
+        ports:
+            - "3001:3001"
+        depends_on:
+            - tor
+    tor:
+        image: dperson/torproxy
+        ports:
+            - "8118:8118"
+            - "9050:9050"
