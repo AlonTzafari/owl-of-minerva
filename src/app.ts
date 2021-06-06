@@ -9,7 +9,9 @@ const app = express();
 app.use('/api', api);
 
 //scraper scheduler TODO: create & import scraper module
-cron.schedule('*/2 * * * *', () => {});
+cron.schedule('*/2 * * * *', () => {
+    console.log('scrape');
+});
 
 
 export default app;
