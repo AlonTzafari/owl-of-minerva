@@ -1,0 +1,30 @@
+{
+  "name": "owl-of-minerva",
+  "version": "1.0.0",
+  "description": "Dark web forum scraper",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlonTzafari/owl-of-minerva.git"
+  },
+  "keywords": [
+    "tor",
+    "scraper",
+    "darkweb"
+  ],
+  "author": "Alon Tzafari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlonTzafari/owl-of-minerva/issues"
+  },
+  "homepage": "https://github.com/AlonTzafari/owl-of-minerva#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "socks-proxy-agent": "^5.0.0"
+  }
+}
