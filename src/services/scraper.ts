@@ -1,12 +1,6 @@
-import axios from './axios-tor';
-const URL = 'http://nzxj65x32vh2fkhk.onion/all?page=';
+import Forum from "./Forum";
 
-type paste = {
-    title: string,
-    author: string,
-    content: string,
-    date: Date
-}
+const FORUM_URL = 'http://nzxj65x32vh2fkhk.onion/all?page=';
 
 const collectPastes = () => {
     //get last collected paste from database (for paste date)
@@ -16,24 +10,21 @@ const collectPastes = () => {
     //save collected pastes to database
 }
 
+async function getLastPasteDate(): Promise<Date> {
+    return new Date('01-01-2021');
+}
 
-
-function extractPastes (url: string, lastPasteDate: Date) {
-    let page = 1;
-    let isPageExists: boolean;
-    let isAnyPasteNew: boolean;
-    const newPastes: paste[] = [];
-    do {
-        //get Page
-        //check page existence
-        isPageExists = true;
-        //extract pastes from page
-        //check if any pastes older than lastPasteDate
-        isAnyPasteNew = true;
-        //add pastes to array
-        page++;
-    } while (isPageExists && isAnyPasteNew)
+async function extractPastes (url: string, lastPasteDate: Date): Promise<paste[]> {
+    const forum = new Forum(url);
+    await forum.load();
+    const allForumPastes = await forum.getAllPastes();
+    // const newPastes = allForumPastes.filter(paste => paste.date > lastPasteDate);
+    const newPastes: paste[] = [] 
     return newPastes;
+}
+
+function savePastes(pastes: paste[]): void {
+
 }
 
 
