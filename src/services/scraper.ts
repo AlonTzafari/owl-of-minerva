@@ -18,8 +18,7 @@ async function extractPastes (url: string, lastPasteDate: Date): Promise<paste[]
     const forum = new Forum(url);
     await forum.load();
     const allForumPastes = await forum.getAllPastes();
-    // const newPastes = allForumPastes.filter(paste => paste.date > lastPasteDate);
-    const newPastes: paste[] = [] 
+    const newPastes = allForumPastes.filter(paste => paste.date > lastPasteDate);
     return newPastes;
 }
 
