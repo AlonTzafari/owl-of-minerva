@@ -10,3 +10,11 @@ services:
         ports:
             - "8118:8118"
             - "9050:9050"
+    db:
+        image: mongo
+        ports:
+            - "27017:27017"
+        environment: 
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=secret
+        
