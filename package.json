@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
+    "mongoose": "^5.12.13",
     "node-cron": "^3.0.0",
     "socks-proxy-agent": "^5.0.0"
   },
