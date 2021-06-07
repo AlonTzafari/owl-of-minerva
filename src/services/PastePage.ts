@@ -6,7 +6,7 @@ export default class PastePage extends Page {
     
     async getPaste() {
         const rawPaste = await this.getPasteRaw();
-        return rawPaste;
+        return formatRawPaste(rawPaste);
     }
     
     
@@ -26,9 +26,12 @@ export default class PastePage extends Page {
     }
 }
 
-// function formatRawPaste(rawPaste) {
-//     const title = removeWhiteSpaces(rawPaste.title);
-//     const [user, date] = seperateUserDate(rawPaste.userDate);
-//     const {content} = rawPaste;
-//     return {title, user, date, content};
-// }
+function formatRawPaste(rawPaste: {title: string, userDate: string, content: string}): paste {
+    const title = rawPaste.title.replace(/[\t\n]/g, '');
+    const userDate = rawPaste.userDate.replace(/[\t\n]|Posted by /g, '');
+
+    const [author, dateStr] = userDate.split(' at ');
+    const date = new Date(dateStr);
+    const {content} = rawPaste;
+    return {title, author, date, content};
+}

@@ -25,14 +25,3 @@ export default class Page {
         });
     }
 }
-
-// function extractFromHTML(HTML: string, extractionMap: extractionMap) {
-//     const output: {[key: string] : any} = {};
-//     const $ = cheerio.load(HTML);
-//     extractionMap.forEach(extraction => {
-//         const {name, selector, attribute} = extraction;
-//         if(attribute === 'text') output[name] = $(selector).text();
-//         else output[name] = $(selector).attr(attribute);
-//     })
-//     return output;
-// }

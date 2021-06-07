@@ -18,7 +18,7 @@ export default class Forum extends Page {
             
             const allPagePastes = await this.getPastesFromPage();
             if (allPagePastes.length === 0) break;
-            allPastes.push(allPagePastes);
+            allPastes.push(...allPagePastes);
             await this.nextPage();
         }
         return allPastes;
