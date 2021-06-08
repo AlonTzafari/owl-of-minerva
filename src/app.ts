@@ -10,9 +10,9 @@ app.use('/api', api);
 //scraper scheduler TODO: create & import scraper module
 cron.schedule('*/2 * * * *', () => {
     console.log('scraping...');
-    collectPastes()
-    .then( () => console.log('scrape completed') )
-    .catch( () => console.log('scrape failed') );
+    // collectPastes()
+    // .then( () => console.log('scrape completed') )
+    // .catch( () => console.log('scrape failed') );
 });
 
 

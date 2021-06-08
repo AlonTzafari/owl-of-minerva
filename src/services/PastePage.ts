@@ -32,6 +32,6 @@ function formatRawPaste(rawPaste: {title: string, userDate: string, content: str
 
     const [author, dateStr] = userDate.split(' at ');
     const date = new Date(dateStr);
-    const {content} = rawPaste;
+    const content = rawPaste.content.trim();
     return {title, author, date, content};
 }
