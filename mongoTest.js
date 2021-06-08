@@ -1,3 +1,4 @@
+require('dotenv').config();
 // MONGO_INITDB_ROOT_USERNAME: root
 // MONGO_INITDB_ROOT_PASSWORD: secret
 const mongoose = require('mongoose');
@@ -30,6 +31,10 @@ mongoose.connect('mongodb://localhost:27017', {useNewUrlParser: true, useUnified
     mongoose.connection.db.listCollections().toArray(function (err, names) {
         console.log(names);
     });
+    
+    const pasteRes = await Paste.find({}).sort('-date').limit(1).exec();
+    console.log('latest paste: ' + pasteRes);
+    
 
 })
 .catch(err => console.log(err))
