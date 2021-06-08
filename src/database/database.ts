@@ -7,11 +7,13 @@ export function connectDB() {
         password: process.env.DB_PASSWORD || 'secret'
     };
     const host = process.env.DB_HOST || 'mongodb://localhost:27017';
-    mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName:'minerva'})
+    return mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName:'dev'})
 }
 
 export function savePastes(pastes: paste[]) {
-    return Paste.insertMany(pastes);
+    console.log('number of pastes added: ' + pastes.length);
+    if (pastes.length < 1) return Promise.resolve();
+    return Paste.create(pastes);
 }
 
 export function getLatestPaste() {

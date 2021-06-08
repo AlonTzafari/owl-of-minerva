@@ -7,12 +7,14 @@ export const collectPastes = async () => {
 
     const pastes = await extractPastes(FORUM_URL, lastDate);
 
-    savePastes(pastes);
+    await savePastes(pastes)
+    .then(() => console.log('pastes saved to DB') );
 }
 
 async function getLastPasteDate(): Promise<Date> {
     const latestPaste = await getLatestPaste();
     if(!latestPaste) throw 'cant get latest paste';
+    if (!latestPaste.date) return new Date('01-01-1990');
     return new Date(latestPaste.date);
 }
 
