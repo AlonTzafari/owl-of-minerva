@@ -14,7 +14,7 @@ function PasteContainer({pastes, loadStatus}: pasteContainerProps) {
             {
                 loadStatus === 'loading' ? <Loader /> :
                 loadStatus === 'fail' ? <Error /> :
-                loadStatus === 'success' ? pastes.map(paste => <Paste paste={paste} />) :
+                loadStatus === 'success' ? pastes.map(paste => <Paste paste={paste} key={paste._id}/>) :
                 null
             }
         </div>

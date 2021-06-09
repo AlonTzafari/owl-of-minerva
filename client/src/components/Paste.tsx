@@ -3,8 +3,9 @@ interface pasteProps {
 }
 
 function Paste({paste}: pasteProps) {
+    
     return (
-        <div>
+        <div className="paste">
             <h3>{paste.title}</h3>
             <p>{paste.content}</p>
             <em>{`create by ${paste.author} at ${new Date(paste.date).toUTCString()}`}</em>

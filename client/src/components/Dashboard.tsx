@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {getAllPastes, getPastesBySearch} from '../services/api';
+import {getPastesBySearch} from '../services/api';
 import SearchBar from './SearchBar';
 import PasteContainer from './PasteContainer';
 
