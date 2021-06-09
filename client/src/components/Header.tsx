@@ -8,6 +8,6 @@ function Header() {
                 <NavLink to="/dashboard" activeClassName="active-link"> Dashboard</NavLink>
             </nav>
         </div>
-    )
+    );
 }
 export default Header;

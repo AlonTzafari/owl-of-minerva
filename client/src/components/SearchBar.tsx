@@ -3,7 +3,7 @@ function SearchBar() {
         <div className="SearchBar">
             <input type="text" placeholder="search for text" />
         </div>
-    )
+    );
 }
 
-export default SearchBar
+export default SearchBar;

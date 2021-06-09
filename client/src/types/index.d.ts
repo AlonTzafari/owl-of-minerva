@@ -1,4 +1,4 @@
-type paste = {
+interface paste {
     title: string,
     author: string,
     content: string,
