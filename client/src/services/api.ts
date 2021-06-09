@@ -7,3 +7,10 @@ export const getAllPastes = () => {
         return data;
     })
 }
+
+export const getPastesBySearch = (searchText: string) => {
+    if (typeof searchText !== 'string') throw new Error('search text must be a string');
+    if (searchText === '') return Promise.resolve([]);
+    return axios.get(host+`/api/paste/search?search=${searchText}`)
+    .then( ({data}) => data );
+}

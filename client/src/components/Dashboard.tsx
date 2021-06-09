@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {getAllPastes} from '../services/api';
+import {getAllPastes, getPastesBySearch} from '../services/api';
 import SearchBar from './SearchBar';
 import PasteContainer from './PasteContainer';
 
@@ -8,20 +8,25 @@ function Dashboard() {
     const [pastes, setPastes] = useState(emptyPasteArray);
     const [pastesLoad, setPastesLoad] = useState('success');
 
-    useEffect(() => {
+    function searchPastes(searchText: string) {
         setPastesLoad('loading');
-        getAllPastes()
+        getPastesBySearch(searchText)
         .then(pastesData => {
             setPastes(pastesData);
             setPastesLoad('success');
         }).catch(err => {
             setPastesLoad('fail');
         });
+    }
+
+    useEffect(() => {
+        setPastes([]);
+        setPastesLoad('success');
     }, []);
 
     return (
         <div className="dashboard">
-            <SearchBar />
+            <SearchBar search={searchPastes}/>
             <PasteContainer pastes={pastes} loadStatus={pastesLoad}/>
         </div>
     );

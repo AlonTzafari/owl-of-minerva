@@ -24,3 +24,16 @@ export function getAllPastes() {
     return Paste.find({}).exec();
 }
 
+export function getPastesBySearch(searchText: string) {
+    const filter = {
+        $or: [
+            {title: {$regex: searchText, $options: 'i'}},
+            {author: {$regex: searchText, $options: 'i'}},
+            {content: {$regex: searchText, $options: 'i'}},
+        ]
+    };
+
+    return Paste.find(filter).exec();
+}
+
+
