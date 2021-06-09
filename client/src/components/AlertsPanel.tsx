@@ -1,8 +1,11 @@
+import KeywordsContainer from './KeywordsContainer';
+import AlertsContainer from './AlertsContainer';
 
 function AlertsPanel() {
     return (
-        <div className="alertsPanel">
-
+        <div className="alertsPanel view">
+            <KeywordsContainer />
+            <AlertsContainer />
         </div>
     );
 }

@@ -25,7 +25,7 @@ function Dashboard() {
     }, []);
 
     return (
-        <div className="dashboard">
+        <div className="dashboard view">
             <SearchBar search={searchPastes}/>
             <PasteContainer pastes={pastes} loadStatus={pastesLoad}/>
         </div>
