@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 function App() {
     return (
         <div className="App">
-            <Header />
             <Router>
+            <Header />
                 <Switch>
                     <Route path="/dashboard">
                         <Dashboard />
