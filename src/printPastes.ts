@@ -1,7 +1,8 @@
 import fs from 'fs';
 import Forum from './services/Forum';
-const forum = new Forum('http://nzxj65x32vh2fkhk.onion/all?page=');
-const func = async () => {
+import {getPastesBySearchFromDate,getAllAlerts, connectDB, disconnectDB} from './database/database';
+const testForum = async () => {
+    const forum = new Forum('http://nzxj65x32vh2fkhk.onion/all?page=');
     await forum.load();
     const pastes = await forum.getAllPastes();
     const pastesStr = JSON.stringify(pastes, null, 4);
@@ -9,4 +10,24 @@ const func = async () => {
     console.log('pastes exported to dump/evil.json');
 }
 
-func();
+const testPasteBySearchDate = async () => {
+    await connectDB();
+    const pastes = await getPastesBySearchFromDate('porn', new Date("2021-06-07T17:53:30.000Z"));
+    const pastesStr = JSON.stringify(pastes, null, 4);
+    const fileName = `pasteFrom${Date.now()}.json`;
+    fs.writeFileSync(`dump/${fileName}`, pastesStr, {encoding: 'utf-8'});
+    console.log(`pastes exported to dump/${fileName}`);
+    disconnectDB();
+}
+
+const testAlerts = async () => {
+    await connectDB();
+    const alerts = await getAllAlerts();
+    const alertsStr = JSON.stringify(alerts, null, 4);
+    const fileName = `alerts.json`;
+    fs.writeFileSync(`dump/${fileName}`, alertsStr, {encoding: 'utf-8'});
+    console.log(`pastes exported to dump/${fileName}`);
+    disconnectDB();
+}
+
+testAlerts();

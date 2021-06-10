@@ -10,6 +10,10 @@ export function connectDB() {
     return mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName: process.env.DB_NAME || 'dev'})
 }
 
+export function disconnectDB() {
+    mongoose.disconnect();
+}
+
 export function savePastes(pastes: paste[]) {
     if (pastes.length < 1) return Promise.resolve();
     return Paste.create(pastes);
@@ -59,6 +63,10 @@ export function saveKeyword(keyword: keyword) {
 
 export function deleteKeyword(word: string) {
     return Keyword.findOneAndDelete({word});
+}
+
+export function getAllAlerts() {
+    return Alert.find({}).exec();
 }
 
 export function saveAlert(alert: alert) {

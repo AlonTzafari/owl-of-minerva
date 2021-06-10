@@ -2,19 +2,12 @@ import {getAllKeywords, saveAlert, getPastesBySearchFromDate, getLastestAlertFor
 import { Alert } from '../database/models';
 
 export default class AlertFinder {
-    #updateInterval;
     #keywordIntervals = {} as {[key: string]: NodeJS.Timeout};
     #keywords: keyword[] = [];
-
-    constructor(interval: number) {
-        this.#updateInterval = interval; 
-    }
     
-    async init() {
+    async update() {
         const newKeywords = await getAllKeywords();
-        setInterval( () => {
-            getAllKeywords().then(this.updateKeywords);
-        }, this.#updateInterval);
+        this.updateKeywords(newKeywords);
     }
 
     private updateKeywords(newKeywords: keyword[]) {
