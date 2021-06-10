@@ -2,7 +2,7 @@ import axios from 'axios';
 const host = 'http://localhost:3001';
 
 export const getAllPastes = () => {
-    return axios.get(host+'/api/paste/all')
+    return axios.get(host + '/api/paste/all')
     .then( ({data}) => {
         return data;
     })
@@ -11,6 +11,15 @@ export const getAllPastes = () => {
 export const getPastesBySearch = (searchText: string) => {
     if (typeof searchText !== 'string') throw new Error('search text must be a string');
     if (searchText === '') return Promise.resolve([]);
-    return axios.get(host+`/api/paste/search?search=${searchText}`)
-    .then( ({data}) => data );
+    return axios.get(host + `/api/paste/search?search=${searchText}`)
+    .then( ({data}) => data as paste[] );
+}
+
+export const getAllKeywords = () => {
+    return axios.get(host + '/api/keyword/all')
+    .then( ({data}) => data as keyword[] );
+}
+
+export const postKeyword = (keyword: keyword) => {
+    return axios.post(host + '/api/keyword', keyword);
 }

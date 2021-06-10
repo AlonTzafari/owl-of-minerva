@@ -1,4 +1,4 @@
-import {Schema, SchemaTypes, model} from 'mongoose';
+import {Schema, model} from 'mongoose';
 
 const pasteSchema = new Schema({
     title: String,

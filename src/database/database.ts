@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Paste from './models/paste';
+import {Paste, Keyword} from './models';
 
 export function connectDB() {
     const auth = {
@@ -11,7 +11,6 @@ export function connectDB() {
 }
 
 export function savePastes(pastes: paste[]) {
-    console.log('number of pastes added: ' + pastes.length);
     if (pastes.length < 1) return Promise.resolve();
     return Paste.create(pastes);
 }
@@ -34,6 +33,18 @@ export function getPastesBySearch(searchText: string) {
     };
 
     return Paste.find(filter).exec();
+}
+
+export function getAllKeywords() {
+    return Keyword.find({}).exec();
+}
+
+export function saveKeyword(keyword: keyword) {
+    return Keyword.create(keyword);
+}
+
+export function deleteKeyword(word: string) {
+    return Keyword.findOneAndDelete({word});
 }
 
 

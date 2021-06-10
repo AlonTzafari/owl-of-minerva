@@ -4,8 +4,8 @@ import SearchBar from './SearchBar';
 import PasteContainer from './PasteContainer';
 
 function Dashboard() {
-    const emptyPasteArray:paste[] = []; 
-    const [pastes, setPastes] = useState(emptyPasteArray);
+    
+    const [pastes, setPastes] = useState([] as paste[]);
     const [pastesLoad, setPastesLoad] = useState('success');
 
     function searchPastes(searchText: string) {
