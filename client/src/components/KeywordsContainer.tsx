@@ -5,6 +5,7 @@ import Keyword from './Keyword';
 function KeywordsContainer() {
 
     const [keywords, setKeywords] = useState([] as keyword[]);
+    const [inputError, setInputError] = useState(null as string | null);
     const wordRef = useRef() as RefObject<HTMLInputElement>; 
     const intervalRef = useRef() as RefObject<HTMLInputElement>;
 
@@ -18,6 +19,13 @@ function KeywordsContainer() {
     }
 
     function addKeyword(keyword: keyword) {
+        const isKeywordExists = keywords.some(keywordFromState => keywordFromState.word === keyword.word);
+        if (isKeywordExists) {
+            const errMsg = `Can't set more than one keyword for same word`;
+            setInputError(errMsg);
+            setInterval(()=>{setInputError(null)}, 5000);
+            return Promise.reject({type: 'input', message: errMsg});
+        }
         return postKeyword(keyword)
         .then(loadKeywords)
     }
@@ -39,6 +47,11 @@ function KeywordsContainer() {
                     wordRef.current.value = '';
                     intervalRef.current.value = '';
                 }
+            }).catch(err => {
+                if (err?.type === 'input') {
+                    setInputError(err.message);
+                    setInterval(()=>{setInputError(null)}, 5000);
+                }
             }); 
         }
         e.preventDefault();
@@ -52,6 +65,7 @@ function KeywordsContainer() {
                 <input ref={intervalRef} type="number" placeholder="interval seconds" required/>
                 <button type="submit">add</button>
             </form>
+            {inputError ? <em>{inputError}</em> : null}
         </div>
     );
 }
