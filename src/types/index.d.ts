@@ -8,10 +8,12 @@ interface paste {
 interface keyword {
     word: string;
     interval: number;
+    _id: string;
 };
 
 interface alert {
     keyword: string;
     date: Date;
     pastes: string[];
+    seen: boolean;
 };

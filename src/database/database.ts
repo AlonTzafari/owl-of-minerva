@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {Paste, Keyword} from './models';
+import {Paste, Keyword, Alert} from './models';
 
 export function connectDB() {
     const auth = {
@@ -34,6 +34,20 @@ export function getPastesBySearch(searchText: string) {
 
     return Paste.find(filter).exec();
 }
+export function getPastesBySearchFromDate(searchText: string, date: Date) {
+    const filter = {
+        $and:[
+            {$or: [
+                {title: {$regex: searchText, $options: 'i'}},
+                {author: {$regex: searchText, $options: 'i'}},
+                {content: {$regex: searchText, $options: 'i'}},
+            ]},
+            {date: {$gt: date}}
+        ]
+    };
+
+    return Paste.find(filter).exec();
+}
 
 export function getAllKeywords() {
     return Keyword.find({}).exec();
@@ -47,4 +61,16 @@ export function deleteKeyword(word: string) {
     return Keyword.findOneAndDelete({word});
 }
 
+export function saveAlert(alert: alert) {
+    return Alert.create(alert);
+}
+
+export function getLastestAlertForKeyword(keyword: keyword): Promise<alert | null> {
+    return Alert.findOne({
+        keyword: keyword._id,
+    })
+    .sort('-date')
+    .limit(1)
+    .exec();
+}
 
