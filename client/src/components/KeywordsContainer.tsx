@@ -22,6 +22,11 @@ function KeywordsContainer() {
         .then(loadKeywords)
     }
 
+    function removeKeywordHandler(word: string) {
+        removeKeyword(word)
+        .then(loadKeywords);
+    }
+
     const keywordSubmitHandler: FormEventHandler<HTMLFormElement> = (e) => {
         const word = wordRef.current?.value as string;
         const intervalStr = intervalRef.current?.value as string;
@@ -41,7 +46,7 @@ function KeywordsContainer() {
 
     return (
         <div>
-            {keywords.map( (keyword, i) => <Keyword key={i} keyword={keyword} remove={ () => removeKeyword(keyword.word) } /> )}
+            {keywords.map( (keyword, i) => <Keyword key={i} keyword={keyword} remove={() => removeKeywordHandler(keyword.word)} /> )}
             <form onSubmit={keywordSubmitHandler}>
                 <input ref={wordRef} type="text" placeholder="keyword" required/>
                 <input ref={intervalRef} type="number" placeholder="interval seconds" required/>
