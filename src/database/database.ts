@@ -7,7 +7,7 @@ export function connectDB() {
         password: process.env.DB_PASSWORD || 'secret'
     };
     const host = process.env.DB_HOST || 'mongodb://localhost:27017';
-    return mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName:'dev'})
+    return mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName: process.env.DB_NAME || 'dev'})
 }
 
 export function savePastes(pastes: paste[]) {
