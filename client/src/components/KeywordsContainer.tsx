@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef, FormEventHandler, RefObject} from 'react';
-import {getAllKeywords, postKeyword} from '../services/api';
+import {getAllKeywords, postKeyword, removeKeyword} from '../services/api';
 import Keyword from './Keyword';
 
 function KeywordsContainer() {
@@ -18,22 +18,30 @@ function KeywordsContainer() {
     }
 
     function addKeyword(keyword: keyword) {
-        postKeyword(keyword)
+        return postKeyword(keyword)
         .then(loadKeywords)
     }
 
     const keywordSubmitHandler: FormEventHandler<HTMLFormElement> = (e) => {
         const word = wordRef.current?.value as string;
         const intervalStr = intervalRef.current?.value as string;
-        const interval = Number(intervalStr);
+        const interval = Number(intervalStr) * 1000;
         const keyword: keyword = {word, interval};
-        if (keyword && interval) addKeyword(keyword); 
+        if (keyword && interval) {
+            addKeyword(keyword)
+            .then(() => {
+                if(wordRef.current && intervalRef.current) {
+                    wordRef.current.value = '';
+                    intervalRef.current.value = '';
+                }
+            }); 
+        }
         e.preventDefault();
     } 
 
     return (
         <div>
-            {keywords.map( (keyword, i) => <Keyword key={i} keyword={keyword} remove={()=>{}} /> )}
+            {keywords.map( (keyword, i) => <Keyword key={i} keyword={keyword} remove={ () => removeKeyword(keyword.word) } /> )}
             <form onSubmit={keywordSubmitHandler}>
                 <input ref={wordRef} type="text" placeholder="keyword" required/>
                 <input ref={intervalRef} type="number" placeholder="interval seconds" required/>

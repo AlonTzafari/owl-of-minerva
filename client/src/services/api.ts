@@ -21,5 +21,10 @@ export const getAllKeywords = () => {
 }
 
 export const postKeyword = (keyword: keyword) => {
-    return axios.post(host + '/api/keyword', keyword);
+    return axios.post(host + '/api/keyword', {keyword});
 }
+
+export const removeKeyword = (word: string) => {
+    return axios.delete(host + `/api/keyword/${word}`);
+}
+
