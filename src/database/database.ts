@@ -69,8 +69,16 @@ export function getAllAlerts() {
     return Alert.find({$where: 'this.pastes.length > 0'});
 }
 
+export function getAllUnseenAlerts() {
+    return Alert.find({seen: false});
+}
+
 export function saveAlert(alert: alert) {
     return Alert.create(alert);
+}
+
+export function seenAlert(alertId: string) {
+    return Alert.findByIdAndUpdate(alertId, {seen: true});
 }
 
 export function getLastestAlertForWord(word: string): Promise<alert | null> {
