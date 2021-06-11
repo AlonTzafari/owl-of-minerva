@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { FilterQuery } from 'mongoose';
 import {Paste, Keyword, Alert} from './models';
 
 export function connectDB() {
@@ -66,7 +66,7 @@ export function deleteKeyword(word: string) {
 }
 
 export function getAllAlerts() {
-    return Alert.find({}).exec();
+    return Alert.find({$where: 'this.pastes.length > 0'});
 }
 
 export function saveAlert(alert: alert) {

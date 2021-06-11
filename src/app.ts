@@ -11,9 +11,9 @@ app.use('/api', api);
 
 alertsManager();
 
-collectPastes().catch( () => console.log('scrape failed') );
+collectPastes().catch( err => console.log(err) );
 cron.schedule('*/2 * * * *', () => {
-    collectPastes().catch( () => console.log('scrape failed') );
+    collectPastes().catch( err => console.log(err) );
 });
 
 

@@ -1,9 +1,12 @@
 import {Router} from 'express';
-import {} from '../database/database';
+import {getAllAlerts} from '../database/database';
 const alert = Router();
 
 alert.get('/all', (req, res, next) => {
-    
+    getAllAlerts()
+    .then(alerts => {
+        res.status(200).json(alerts);
+    }).catch(err => next(err));
 });
 
 alert.get('/unseen', (req, res, next) => {
