@@ -1,6 +1,7 @@
 import fs from 'fs';
 import Forum from './services/Forum';
 import {getPastesBySearchFromDate,getAllAlerts, connectDB, disconnectDB} from './database/database';
+import {Alert} from './database/models'
 const testForum = async () => {
     const forum = new Forum('http://nzxj65x32vh2fkhk.onion/all?page=');
     await forum.load();
@@ -30,4 +31,12 @@ const testAlerts = async () => {
     disconnectDB();
 }
 
-testAlerts();
+const updateDataAlertStart = async () => {
+    await connectDB();
+    await Alert.findOneAndUpdate({keyword: 'data'}, {date: new Date('2021-06-08T11:29:20.000Z')}).exec();
+    const alert = await Alert.findOne({keyword: 'data'}).exec();
+    console.log('updated alert: ', alert);
+    disconnectDB();
+}
+
+updateDataAlertStart();

@@ -1,50 +1,49 @@
-import {getAllKeywords, saveAlert, getPastesBySearchFromDate, getLastestAlertForKeyword} from '../database/database';
-import { Alert } from '../database/models';
+import {saveAlert, getPastesBySearchFromDate, getLastestAlertForWord} from '../database/database';
 
 export default class AlertFinder {
-    #keywordIntervals = {} as {[key: string]: NodeJS.Timeout};
-    #keywords: keyword[] = [];
+    #searchInterval: NodeJS.Timeout;
+    _keyword: keyword;
+
+    constructor(keyword: keyword) {
+        this._keyword = keyword;
+        this.#searchInterval = setInterval(this.scanAlert.bind(this), this._keyword.interval);
+    }
     
-    async update() {
-        const newKeywords = await getAllKeywords();
-        this.updateKeywords(newKeywords);
+    terminate() {
+        clearInterval(this.#searchInterval);
     }
 
-    private updateKeywords(newKeywords: keyword[]) {
-        if ( !this.isKeywordsOutdated(newKeywords) ) return;
-        const keywordsToAdd = newKeywords.filter(newKeyword => !this.#keywords.some(keyword => keyword._id === newKeyword._id));
-        const keywordsToRemove = newKeywords.filter(newKeyword => !this.#keywords.some(keyword => keyword._id === newKeyword._id),);
-
-        keywordsToAdd.forEach(keyword => {
-            this.#keywordIntervals[keyword._id] = setInterval(() => createAlert(keyword), keyword.interval);
-        });
-
-        keywordsToRemove.forEach(keyword => {
-            clearInterval( this.#keywordIntervals[keyword._id] );
-        });
-
-        this.#keywords = newKeywords;
+    getId() {
+        return this._keyword._id;
     }
 
-    private isKeywordsOutdated(newKeywords: keyword[]) {
-        if (this.#keywords.length !== newKeywords.length) return false;
-        return newKeywords.every(newKeyword => {
-            return this.#keywords.some(keyword => keyword._id === newKeyword._id)
-        });
+    private async scanAlert() {
+        const lastAlert = await getLastestAlertForWord(this._keyword.word);
+        if(!lastAlert) return this.setBaseAlert();
+        this.createAlert(lastAlert.date);
     }
 
-}
-
-function createAlert(keyword: keyword) {
-    getLastestAlertForKeyword(keyword)
-    .then(lastAlert => getPastesBySearchFromDate(keyword.word, lastAlert?.date || new Date('01-01-1997')))
-    .then( (pastes) => {
+    private async createAlert(dateToSearchFrom: Date) {
+        const {word} = this._keyword;
+        const pastes = await getPastesBySearchFromDate(this._keyword.word, dateToSearchFrom);
+        if (pastes.length === 0) return;      
         const alert: alert = {
-            keyword: keyword._id,
+            keyword: word,
             date: new Date(),
             pastes: pastes.map(paste => paste._id),
             seen: false
-        }
-        Alert.create(alert);
-    })
-} 
+        };
+        saveAlert(alert);
+    }
+    
+    private setBaseAlert() {
+        const {word} = this._keyword;
+        const alert: alert = {
+            keyword: word,
+            date: new Date(),
+            pastes: [],
+            seen: true
+        };
+        saveAlert(alert);
+    }
+}

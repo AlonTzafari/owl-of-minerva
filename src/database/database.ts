@@ -7,7 +7,7 @@ export function connectDB() {
         password: process.env.DB_PASSWORD || 'secret'
     };
     const host = process.env.DB_HOST || 'mongodb://localhost:27017';
-    return mongoose.connect(host, {useNewUrlParser: true, useUnifiedTopology: true, auth, dbName: process.env.DB_NAME || 'dev'})
+    return mongoose.connect(host, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, auth, dbName: process.env.DB_NAME || 'dev'})
 }
 
 export function disconnectDB() {
@@ -73,9 +73,9 @@ export function saveAlert(alert: alert) {
     return Alert.create(alert);
 }
 
-export function getLastestAlertForKeyword(keyword: keyword): Promise<alert | null> {
+export function getLastestAlertForWord(word: string): Promise<alert | null> {
     return Alert.findOne({
-        keyword: keyword._id,
+        keyword: word,
     })
     .sort('-date')
     .limit(1)

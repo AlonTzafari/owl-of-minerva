@@ -14,7 +14,7 @@ export default class Forum extends Page {
     async getAllPastes() {
         const allPastes = [];
         while(this.isExists) {
-            await this.loadPastePagesFromCurrentPage(); console.log(`loading paste pages from page ${this.pageNumber}`);
+            await this.loadPastePagesFromCurrentPage();
             
             const allPagePastes = await this.getPastesFromPage();
             if (allPagePastes.length === 0) break;

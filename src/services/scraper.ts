@@ -7,8 +7,7 @@ export const collectPastes = async () => {
 
     const pastes = await extractPastes(FORUM_URL, lastDate);
 
-    await savePastes(pastes)
-    .then(() => console.log('pastes saved to DB') );
+    await savePastes(pastes);
 }
 
 async function getLastPasteDate(): Promise<Date> {
