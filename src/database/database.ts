@@ -78,7 +78,7 @@ export function saveAlert(alert: alert) {
 }
 
 export function seenAlert(alertId: string) {
-    return Alert.findByIdAndUpdate(alertId, {seen: true});
+    return Alert.findByIdAndUpdate(alertId, {seen: true}, {useFindAndModify: false});
 }
 
 export function getLastestAlertForWord(word: string): Promise<alert | null> {
