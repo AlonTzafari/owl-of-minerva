@@ -1,9 +1,6 @@
 import {Router} from 'express';
 import {getAllKeywords, saveKeyword, deleteKeyword} from '../database/database';
-import AlertFinder from '../services/AlertFinder';
 const keyword = Router();
-const alertFinder = new AlertFinder();
-alertFinder.update();
 const MIN_INTERVAL_MS = 60000;
 
 keyword.get('/all', (req, res, next) => {
@@ -16,10 +13,7 @@ keyword.post('/', (req, res, next) => {
     const keyword = req.body.keyword as keyword;
     if ( !isKeywordValid(keyword) ) return res.status(400).end();
     saveKeyword(keyword)
-    .then( () => {
-        alertFinder.update();
-        res.status(201).end();
-    })
+    .then( () => res.status(201).end() )
     .catch( err => next(err) );
 
     res.status(201).end()
