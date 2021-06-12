@@ -29,7 +29,8 @@ export const removeKeyword = (word: string) => {
 }
 
 export const getAllAlerts = () => {
-    return axios.get(host + `/api/alert/all`);
+    return axios.get(host + `/api/alert/all`)
+    .then(({data}) => data as alert[]);
 }
 
 
