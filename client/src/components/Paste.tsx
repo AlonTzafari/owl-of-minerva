@@ -11,7 +11,7 @@ function Paste({paste}: pasteProps) {
         <div className="paste">
             <div className="pasteHeader">
                 <span className="title">{paste.title}</span>
-                <button onClick={() => {setExpanded(!expanded)}}>{expanded ? 'collapse' : 'expand'}</button>
+                <button onClick={() => {setExpanded(!expanded)}}>{expanded ? '≙' : '≪'}</button>
             </div>
             <p className={`content ${expanded ? 'expanded' : null}`}>{paste.content}</p>
             <span className="details">{`create by ${paste.author} at ${new Date(paste.date).toUTCString()}`}</span>
