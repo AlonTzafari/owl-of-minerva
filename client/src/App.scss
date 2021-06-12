@@ -2,11 +2,13 @@
 
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .view {
     padding-top: $headerHeight;
     box-sizing: border-box;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
+    background-color: $viewBackground;
 }
