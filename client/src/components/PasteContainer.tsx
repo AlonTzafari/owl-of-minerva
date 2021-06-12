@@ -1,3 +1,4 @@
+import '../styles/PasteContainer.scss';
 import Paste from './Paste';
 import Loader from './Loader';
 import Error from './Error';

@@ -3,8 +3,8 @@
 .searchBar {
     padding-top: 3rem;
     padding-bottom: 1rem;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: $contentMinPad;
+    padding-right: $contentMinPad;
     input {
         border: unset;
         background-color: $highlightColor;
