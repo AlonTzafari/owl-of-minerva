@@ -10,7 +10,7 @@ interface pasteContainerProps {
 function PasteContainer({pastes, loadStatus}: pasteContainerProps) {
     
     return (
-        <div>
+        <div className="pasteContainer">
             {
                 loadStatus === 'loading' ? <Loader /> :
                 loadStatus === 'fail' ? <Error /> :

@@ -3,11 +3,15 @@
 .searchBar {
     padding-top: 3rem;
     padding-bottom: 1rem;
+    padding-left: 25px;
+    padding-right: 25px;
     input {
         border: unset;
         background-color: $highlightColor;
+        box-sizing: border-box;
         height: 3rem;
-        width: 30%;
+        width: 100%;
+        max-width: $maxContentWidth;
         border-radius: 1.5rem;
         padding-left: 1.5rem;
         padding-right: 1.5rem;
