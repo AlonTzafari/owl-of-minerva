@@ -3,6 +3,7 @@ interface paste {
     author: string;
     content: string;
     date: Date;
+    _id: string;
 };
 
 interface keyword {
@@ -16,4 +17,5 @@ interface alert {
     date: Date;
     pastes: string[];
     seen: boolean;
+    _id: string;
 };
