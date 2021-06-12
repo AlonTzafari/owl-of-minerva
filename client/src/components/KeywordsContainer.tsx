@@ -1,3 +1,4 @@
+import '../styles/KeywordsContainer.scss';
 import {useState, useEffect, useRef, FormEventHandler, RefObject} from 'react';
 import {getAllKeywords, postKeyword, removeKeyword} from '../services/api';
 import Keyword from './Keyword';
@@ -58,12 +59,12 @@ function KeywordsContainer() {
     } 
 
     return (
-        <div>
+        <div className="keywordsContainer">
             {keywords.map( (keyword, i) => <Keyword key={i} keyword={keyword} remove={() => removeKeywordHandler(keyword.word)} /> )}
             <form onSubmit={keywordSubmitHandler}>
                 <input ref={wordRef} type="text" placeholder="keyword" required/>
                 <input ref={intervalRef} type="number" placeholder="interval seconds" required/>
-                <button type="submit">add</button>
+                <button type="submit">✚</button>
             </form>
             {inputError ? <em>{inputError}</em> : null}
         </div>

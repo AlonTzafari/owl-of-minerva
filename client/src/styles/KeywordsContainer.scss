@@ -1,0 +1,48 @@
+@import './constants.scss';
+
+.keywordsContainer {
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-left: $contentMinPad;
+    padding-right: $contentMinPad;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        max-width: $maxContentWidth;
+        width: 100%;
+        input {
+            border: unset;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            $keywordHeight: 2.5rem;
+            background-color: $highlightColor;
+            box-sizing: border-box;
+            min-height: $keywordHeight;
+            width: 10rem;
+            max-width: $maxContentWidth;
+            border-radius: $keywordHeight/2;
+            padding-left: $keywordHeight/2;
+            padding-right: 3px;
+            font-size: 1rem;
+            &:focus {
+                outline: unset;
+            }
+        }
+        button {
+            all: unset;
+            color: rgba(0, 0, 0, 0.374);
+            font-size: 2rem;
+            &:hover {
+                cursor: pointer;
+                color: rgb(10, 186, 25);
+            }
+        }
+    }
+}

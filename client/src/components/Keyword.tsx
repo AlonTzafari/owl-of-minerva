@@ -1,3 +1,5 @@
+import '../styles/Keyword.scss';
+
 interface keywordProps {
     keyword: keyword;
     remove: Function;
@@ -5,10 +7,10 @@ interface keywordProps {
 
 function Keyword({keyword, remove}: keywordProps) {
     return (
-        <div>
+        <div className="keyword">
             <span>{keyword.word}</span>
             <span>{`${keyword.interval/1000}s`}</span>
-            <button onClick={() => remove()}>remove</button>
+            <button onClick={() => remove()}>✖</button>
         </div>
     );
 }
