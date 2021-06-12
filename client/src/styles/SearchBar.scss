@@ -1,0 +1,19 @@
+@import './constants.scss';
+
+.searchBar {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    input {
+        border: unset;
+        background-color: $highlightColor;
+        height: 3rem;
+        width: 30%;
+        border-radius: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 1rem;
+        &:focus {
+            outline: unset;
+        }
+    }
+}

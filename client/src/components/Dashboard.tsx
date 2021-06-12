@@ -1,3 +1,4 @@
+import '../styles/Dashboard.scss';
 import {useState, useEffect} from 'react';
 import {getPastesBySearch} from '../services/api';
 import SearchBar from './SearchBar';

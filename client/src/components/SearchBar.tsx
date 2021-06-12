@@ -1,3 +1,4 @@
+import '../styles/SearchBar.scss';
 import {ChangeEventHandler} from "react";
 import debounce from '../services/debounce';
 
@@ -16,7 +17,7 @@ function SearchBar({search}: searchBarProps) {
     const handleSearchInputDebounced = debounce(handleSearchInput, 250);
 
     return (
-        <div className="SearchBar">
+        <div className="searchBar">
             <input type="text" placeholder="search for text" onChange={handleSearchInputDebounced}/>
         </div>
     );
