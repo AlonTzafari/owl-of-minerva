@@ -1,0 +1,68 @@
+@import './constants.scss';
+
+.paste {
+    display: flex;
+    flex-direction: column;
+    max-width: $maxContentWidth;
+    width: 100%;
+    background-color: $contentColor;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.374);
+
+    .pasteHeader{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        
+        .title {
+            font-weight: bold;
+        }
+        button {
+            // all: unset;
+        }
+
+    }
+
+    .content {
+        border-top: 0 solid $viewBackground;
+        border-bottom: 0 solid $viewBackground;
+        margin: 0;
+        overflow-wrap: break-word;
+        overflow-y: scroll;
+        height: 0;
+        max-height: 0;
+        transition: all;
+        transition-duration: 200ms;
+        
+        &.expanded {
+            border-top: 2px solid $viewBackground;
+            border-bottom: 2px solid $viewBackground;
+            height: 100px;
+            max-height: 100px;
+        }
+        
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            background: rgb(46, 46, 46);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgb(29, 29, 29);
+        }
+
+    }
+
+    .details {
+        margin-right: auto;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.503);
+    }
+}

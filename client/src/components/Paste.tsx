@@ -1,14 +1,20 @@
+import { useState } from 'react';
+import '../styles/Paste.scss';
+
 interface pasteProps {
     paste: paste
 }
 
 function Paste({paste}: pasteProps) {
-    
+    const [expanded, setExpanded] = useState(false);
     return (
         <div className="paste">
-            <h3>{paste.title}</h3>
-            <p>{paste.content}</p>
-            <em>{`create by ${paste.author} at ${new Date(paste.date).toUTCString()}`}</em>
+            <div className="pasteHeader">
+                <span className="title">{paste.title}</span>
+                <button onClick={() => {setExpanded(!expanded)}}>{expanded ? 'collapse' : 'expand'}</button>
+            </div>
+            <p className={`content ${expanded ? 'expanded' : null}`}>{paste.content}</p>
+            <span className="details">{`create by ${paste.author} at ${new Date(paste.date).toUTCString()}`}</span>
         </div>
     );
 }
