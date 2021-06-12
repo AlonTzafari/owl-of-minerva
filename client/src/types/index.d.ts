@@ -9,7 +9,7 @@ interface paste {
 interface keyword {
     word: string;
     interval: number;
-    _id: string;
+    _id?: string;
 };
 
 interface alert {
