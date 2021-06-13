@@ -3,13 +3,13 @@ interface paste {
     author: string;
     content: string;
     date: Date;
-    _id: string;
+    _id?: string;
 };
 
 interface keyword {
     word: string;
     interval: number;
-    _id: string;
+    _id?: string;
 };
 
 interface alert {
@@ -17,5 +17,5 @@ interface alert {
     date: Date;
     pastes: string[];
     seen: boolean;
-    _id: string;
+    _id?: string;
 };

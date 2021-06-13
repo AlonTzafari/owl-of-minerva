@@ -66,7 +66,16 @@ export function deleteKeyword(word: string) {
 }
 
 export function getAllAlerts() {
-    return Alert.find({$where: 'this.pastes.length > 0'});
+    return Alert.find({$where: 'this.pastes.length > 0'}).exec()
+    .then(alerts => {
+        const alertsWithPastes = alerts.map(alert => {
+           return getPastesForAlert(alert)
+           .then(pastes => {
+               return Object.assign({}, alert, {pastes});
+           });
+       });
+       return Promise.all(alertsWithPastes);
+    });
 }
 
 export function getAllUnseenAlerts() {
@@ -90,3 +99,8 @@ export function getLastestAlertForWord(word: string): Promise<alert | null> {
     .exec();
 }
 
+function getPastesForAlert(alert: alert): Promise<paste[]> {
+    return Paste.find({
+        _id: {$in: alert.pastes}
+    }).exec();
+}

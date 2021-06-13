@@ -4,7 +4,7 @@ import Loader from './Loader';
 import Alert from './Alert';
 
 function AlertsContainer() {
-    const [alerts, setAlerts] = useState([] as alert[])
+    const [alerts, setAlerts] = useState([] as verboseAlert[])
     const [alertsLoad, setAlertsLoad] = useState('loading')
     
     useEffect(updateAlerts, []);

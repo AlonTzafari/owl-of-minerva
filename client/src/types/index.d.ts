@@ -19,3 +19,11 @@ interface alert {
     seen: boolean;
     _id: string;
 };
+
+interface verboseAlert {
+    keyword: string;
+    date: Date;
+    pastes: paste[];
+    seen: boolean;
+    _id: string;
+};
