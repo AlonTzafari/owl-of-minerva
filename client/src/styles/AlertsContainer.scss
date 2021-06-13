@@ -1,0 +1,10 @@
+@import './constants.scss';
+
+.alertsContainer {
+    box-sizing: border-box;
+    padding-left: $contentMinPad;
+    padding-right: $contentMinPad;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

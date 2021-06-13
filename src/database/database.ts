@@ -71,7 +71,8 @@ export function getAllAlerts() {
         const alertsWithPastes = alerts.map(alert => {
            return getPastesForAlert(alert)
            .then(pastes => {
-               return Object.assign({}, alert, {pastes});
+               const {_id, keyword, date, seen} = alert;
+               return {_id,keyword, date, seen, pastes};
            });
        });
        return Promise.all(alertsWithPastes);

@@ -1,3 +1,4 @@
+import '../styles/AlertsContainer.scss';
 import {useState, useEffect} from 'react';
 import {getAllAlerts} from '../services/api';
 import Loader from './Loader';
@@ -19,7 +20,7 @@ function AlertsContainer() {
     }
     
     return (
-        <div>
+        <div className="alertsContainer">
             {
                 alertsLoad === 'loading' ? <Loader /> :
                 alertsLoad === 'fail' ? <h2>Failed to load alerts</h2> :
