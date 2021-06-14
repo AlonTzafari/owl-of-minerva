@@ -1,19 +1,36 @@
 services:
     app:
         build: .
+        container_name: server
+        restart: always
+        environment: 
+            - DB_HOST="mongodb://db"
+            - DB_USER="root"
+            - DB_PASSWORD="secret"
+            - NODE_ENV="production"
+            - TOR_PROXY_HOST="tor"
         ports:
             - "3001:3001"
+        expose: 
+            - "3001"
         depends_on:
             - tor
+            - mongo
     tor:
+        container_name: tor
+        restart: always
         image: dperson/torproxy
         ports:
             - "8118:8118"
             - "9050:9050"
     db:
+        container_name: mongo
         image: mongo
+        restart: always
         ports:
             - "27017:27017"
+        expose: 
+            - "27017"
         environment: 
             - MONGO_INITDB_ROOT_USERNAME=root
             - MONGO_INITDB_ROOT_PASSWORD=secret

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { SocksProxyAgent } from 'socks-proxy-agent';
-const agent = new SocksProxyAgent('socks5h://127.0.0.1:9050');
+const proxyHost = process.env.TOR_PROXY_HOST || '127.0.0.1'; 
+const agent = new SocksProxyAgent('socks5h://'+ proxyHost + ':9050');
 const axiosTor = axios.create();
 
 axiosTor.interceptors.request.use(config => {
